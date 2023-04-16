@@ -1,0 +1,19 @@
+{
+    "name": "erick/microframework",
+    "description": "Mi primer framework",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Erick\\Microframework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Erick Tucto",
+            "email": "erick@ericktucto.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
