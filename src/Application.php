@@ -2,7 +2,7 @@
 
 namespace Touch;
 
-use Bramus\Router\Router;
+use IPub\SlimRouter\Routing\Router;
 use Clockwork\DataSource\EloquentDataSource;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
@@ -12,6 +12,8 @@ use Illuminate\Database\ConnectionResolver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use PDO;
+use Psr\Http\Message\ServerRequestInterface;
+use Touch\Core\Clockwork\ApiController as ClockworkController;
 use Touch\Core\Eloquent\Dispatcher as EloquentDispatcher;
 
 class Application
@@ -19,7 +21,7 @@ class Application
     protected static ?Container $container;
     protected Clockwork $clockwork;
 
-    public function __construct(protected Router $router)
+    public function __construct(protected Router $router, protected ServerRequestInterface $server)
     {
         $this->connectionDatabase();
         $this->clockInit();
@@ -27,12 +29,16 @@ class Application
 
     protected function clockInit()
     {
-        $this->clockwork = Clockwork::init(['register_helpers' => true]);
         $dataSource = new EloquentDataSource(
             Model::getConnectionResolver(),
             Model::getEventDispatcher(),
         );
-        clock()->addDataSource($dataSource);
+      $this->clockwork = Clockwork::init(['register_helpers' => true]);
+      $this->clockwork->addDataSource($dataSource);
+      $this->router->get(
+        "/__clockwork/{request:.+}",
+        controller(ClockworkController::class, "index")
+      );
     }
 
     protected function connectionDatabase()
@@ -74,13 +80,8 @@ class Application
 
     public function run()
     {
-        $this->router->get('/__clockwork/{request:.+}', function ($request) {
-            header('Content-Type: application/json');
-            $jsonArray = $this->clockwork->getMetadata($request);
-            echo json_encode($jsonArray);
-        });
-        $this->router->run(function () {
-            $this->clockwork->requestProcessed();
-        });
+        $response = $this->router->handle($this->server);
+        $this->clockwork->requestProcessed();
+        echo $response->getBody();
     }
 }

@@ -2,22 +2,26 @@
 
 namespace Touch\Controllers;
 
-use Touch\Controllers\Traits\HasViewTwig;
-//use Touch\Models\Company;
+use GuzzleHttp\Psr7\ServerRequest;
+use IPub\SlimRouter\Http\Response;
+use Touch\Models\Company;
 
-class HomeController extends Controller
+class HomeController
 {
-    use HasViewTwig;
+    use Traits\HasViewTwig;
 
-    public function index()
+    public function index(ServerRequest $request, Response $response)
     {
-      //$c = Company::first();
-      $nombre = $this->request->query("nombre");
-      echo $this->view("index", compact("nombre"));
+      $c = Company::first();
+      $nombre = request($request)->query("nombre", "¿cual es tu nombre ?");
+
+      return $response->html(
+        $this->view("index", compact("nombre"))
+      );
     }
-    public function enviar()
+    public function enviar(ServerRequest $request, Response $response)
     {
-      $password = $this->request->body("password");
-      echo $this->view("enviar", compact("password"));
+      $name = request($request)->body("name");
+      return $response->json(["message" => "Hola {$name}"]);
     }
 }
