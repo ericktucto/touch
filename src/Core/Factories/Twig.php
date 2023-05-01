@@ -10,6 +10,8 @@ class Twig
 {
   public static function create(ContainerInterface $container)
   {
-    return new Environment(new FilesystemLoader($container->get("root") . "/views"));
+    return new Environment(
+      new FilesystemLoader($container->get("root") . "/views")
+    );
   }
 }
