@@ -26,6 +26,7 @@
         "itsgoingd/clockwork": "dev-master",
         "symfony/var-dumper": "6.3.x-dev",
         "guzzlehttp/psr7": "2.6.x-dev",
-        "ipub/slim-router": "dev-master"
+        "ipub/slim-router": "dev-master",
+        "league/event": "^3.0@dev"
     }
 }

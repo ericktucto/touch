@@ -3,7 +3,6 @@
 namespace Touch;
 
 use IPub\SlimRouter\Routing\Router;
-use Clockwork\DataSource\EloquentDataSource;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -14,6 +13,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use PDO;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Clockwork\ApiController as ClockworkController;
+use Touch\Core\Eloquent\DataSource as EloquentDataSource;
 use Touch\Core\Eloquent\Dispatcher as EloquentDispatcher;
 
 class Application
@@ -34,6 +34,7 @@ class Application
             Model::getEventDispatcher(),
         );
       $this->clockwork = Clockwork::init(['register_helpers' => true]);
+        $dataSource->listenToEvents();
       $this->clockwork->addDataSource($dataSource);
       $this->router->get(
         "/__clockwork/{request:.+}",

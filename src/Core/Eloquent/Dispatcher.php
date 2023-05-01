@@ -2,15 +2,25 @@
 
 namespace Touch\Core\Eloquent;
 
-use Illuminate\Contracts\Events\Dispatcher as EloquentDispatcher;
+use Illuminate\Contracts\Events\Dispatcher as IDispatcher;
+use League\Event\EventDispatcher;
 
-class Dispatcher implements EloquentDispatcher
+class Dispatcher implements IDispatcher
 {
-    protected array $listeners = [];
+    protected EventDispatcher $dispatcher;
+
+    public function __construct()
+    {
+      $this->dispatcher = new EventDispatcher();
+    }
 
     public function dispatch($event, $payload = [], $halt = false)
     {
-        clock("dispatch: init", $event, "dispatch: end");
+      if ($this->hasListeners($event)) {
+        $pattern = [];
+        preg_match("/(eloquent\.\w*:)\ (.*)/", $event, $pattern);
+        $this->dispatcher->dispatch(new Event("{$pattern[1]} *", $payload));
+      }
     }
 
     public function until($event, $payload = [])
@@ -24,12 +34,12 @@ class Dispatcher implements EloquentDispatcher
     }
 
     public function forget($event): void {
-        
+
     }
 
     public function forgetPushed(): void
     {
-        foreach ($this->listeners as $key => $value) {
+        foreach (/*$this->listeners*/[] as $key => $value) {
             if (str_ends_with($key, '_pushed')) {
                 $this->forget($key);
             }
@@ -38,12 +48,17 @@ class Dispatcher implements EloquentDispatcher
 
     public function hasListeners($eventName): bool
     {
-        clock("hasListeners: init", $eventName, "hasListeners: end");
-        return isset($this->listeners[$eventName]);
+      return str_contains($eventName, "eloquent");
     }
 
-    public function listen($events, $listener = null): void {
-        clock("listen: init", $events, "listen: end");
+    public function listen($events, $listener = null): void
+    {
+      $events = is_string($events) ? [$events] : $events;
+      if (is_array($events)) {
+        foreach ($events as $event) {
+          $this->dispatcher->subscribeTo($event, $listener);
+        }
+      }
     }
 
     public function push($event, $payload = []): void
@@ -52,6 +67,6 @@ class Dispatcher implements EloquentDispatcher
     }
 
     public function subscribe($subscriber): void {
-        
+
     }
 }
