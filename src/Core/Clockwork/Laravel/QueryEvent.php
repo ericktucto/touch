@@ -1,6 +1,6 @@
 <?php
 
-namespace Touch\Core\Eloquent;
+namespace Touch\Core\Clockwork\Laravel;
 
 use Illuminate\Database\Events\QueryExecuted;
 use League\Event\HasEventName;

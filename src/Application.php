@@ -5,7 +5,6 @@ namespace Touch;
 use IPub\SlimRouter\Routing\Router;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
 use Illuminate\Database\ConnectionResolver;
 use Illuminate\Database\Eloquent\Model;
@@ -13,9 +12,8 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use PDO;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Clockwork\ApiController as ClockworkController;
-use Touch\Core\Clockwork\TwigDataSource;
-use Touch\Core\Eloquent\DataSource as EloquentDataSource;
-use Touch\Core\Eloquent\Dispatcher as EloquentDispatcher;
+use Touch\Core\Clockwork\DataSource\{ EloquentDataSource, TwigDataSource };
+use Touch\Core\Clockwork\Laravel\Dispatcher;
 
 class Application
 {
@@ -51,7 +49,7 @@ class Application
 
     protected function connectionDatabase()
     {
-        $dispatcher = $this->createEventDispatcher();
+        $dispatcher = new Dispatcher();
         Model::setEventDispatcher($dispatcher);
 
         $pdo = new PDO("mysql:host=mysql;dbname=application", "erick", "1234");
@@ -63,12 +61,6 @@ class Application
         ]);
         $resolver->setDefaultConnection("mysql");
         Model::setConnectionResolver($resolver);
-    }
-
-    protected function createEventDispatcher() : Dispatcher
-    {
-        $dispatcher = new EloquentDispatcher();
-        return $dispatcher;
     }
 
     public static function setContainer(Container $container)

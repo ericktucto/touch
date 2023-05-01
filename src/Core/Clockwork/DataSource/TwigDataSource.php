@@ -1,6 +1,6 @@
 <?php
 
-namespace Touch\Core\Clockwork;
+namespace Touch\Core\Clockwork\DataSource;
 
 use Clockwork\DataSource\DataSource;
 use Clockwork\Request\Request;

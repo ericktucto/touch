@@ -1,6 +1,6 @@
 <?php
 
-namespace Touch\Core\Eloquent;
+namespace Touch\Core\Clockwork\Laravel;
 
 use Illuminate\Contracts\Events\Dispatcher as IDispatcher;
 use Illuminate\Database\Events\QueryExecuted;
@@ -21,7 +21,7 @@ class Dispatcher implements IDispatcher
         if (is_string($event)) {
           $pattern = [];
           preg_match("/(eloquent\.\w*:)\ (.*)/", $event, $pattern);
-          $this->dispatcher->dispatch(new Event("{$pattern[1]} *", $payload));
+          $this->dispatcher->dispatch(new EloquentEvent("{$pattern[1]} *", $payload));
         } elseif ($event instanceof QueryExecuted) {
           $this->dispatcher->dispatch(new QueryEvent($event));
         }

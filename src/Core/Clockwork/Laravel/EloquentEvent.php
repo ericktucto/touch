@@ -1,11 +1,11 @@
 <?php
 
-namespace Touch\Core\Eloquent;
+namespace Touch\Core\Clockwork\Laravel;
 
 use Illuminate\Database\Eloquent\Model;
 use League\Event\HasEventName;
 
-class Event implements HasEventName
+class EloquentEvent implements HasEventName
 {
   public function __construct(protected string $name, protected ?Model $model = null)
   {

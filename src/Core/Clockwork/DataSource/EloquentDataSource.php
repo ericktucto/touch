@@ -1,10 +1,10 @@
 <?php
 
-namespace Touch\Core\Eloquent;
+namespace Touch\Core\Clockwork\DataSource;
 
-use Clockwork\DataSource\EloquentDataSource;
+use Clockwork\DataSource\EloquentDataSource as DataSource;
 
-class DataSource extends EloquentDataSource
+class EloquentDataSource extends DataSource
 {
   // Register a listener collecting model events of specified type
   protected function listenToModelEvent($event)
