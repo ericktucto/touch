@@ -5,7 +5,6 @@ namespace Touch;
 use IPub\SlimRouter\Routing\Router;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
-use Illuminate\Database\ConnectionResolverInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Application
@@ -15,7 +14,6 @@ class Application
     public function __construct(
       protected Router $router,
       protected ServerRequestInterface $server,
-      protected ConnectionResolverInterface $resolver,
       protected Clockwork $clockwork,
     ) {
     }

@@ -11,6 +11,11 @@ class CompanyController
     use Traits\HasViewTwig,
       Traits\HasConnectionDatabase;
 
+    public function __construct()
+    {
+      $this->conn();
+    }
+
     public function index(ServerRequest $request, Response $response)
     {
       $companies = Company::take(10)->get();

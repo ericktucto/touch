@@ -2,12 +2,12 @@
 
 namespace Touch\Controllers\Traits;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\ConnectionResolverInterface;
 
 trait HasConnectionDatabase
 {
   protected function conn()
   {
-    return Model::resolveConnection();
+    return app(ConnectionResolverInterface::class);
   }
 }

@@ -4,7 +4,6 @@ namespace Touch\Controllers;
 
 use GuzzleHttp\Psr7\ServerRequest;
 use IPub\SlimRouter\Http\Response;
-use Touch\Models\Company;
 
 class HomeController
 {
@@ -12,7 +11,6 @@ class HomeController
 
     public function index(ServerRequest $request, Response $response)
     {
-      $c = Company::first();
       $nombre = request($request)->query("nombre", "¿cual es tu nombre ?");
 
       return $response->html(
