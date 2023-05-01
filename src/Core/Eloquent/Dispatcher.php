@@ -3,6 +3,7 @@
 namespace Touch\Core\Eloquent;
 
 use Illuminate\Contracts\Events\Dispatcher as IDispatcher;
+use Illuminate\Database\Events\QueryExecuted;
 use League\Event\EventDispatcher;
 
 class Dispatcher implements IDispatcher
@@ -17,9 +18,13 @@ class Dispatcher implements IDispatcher
     public function dispatch($event, $payload = [], $halt = false)
     {
       if ($this->hasListeners($event)) {
-        $pattern = [];
-        preg_match("/(eloquent\.\w*:)\ (.*)/", $event, $pattern);
-        $this->dispatcher->dispatch(new Event("{$pattern[1]} *", $payload));
+        if (is_string($event)) {
+          $pattern = [];
+          preg_match("/(eloquent\.\w*:)\ (.*)/", $event, $pattern);
+          $this->dispatcher->dispatch(new Event("{$pattern[1]} *", $payload));
+        } elseif ($event instanceof QueryExecuted) {
+          $this->dispatcher->dispatch(new QueryEvent($event));
+        }
       }
     }
 
@@ -39,16 +44,14 @@ class Dispatcher implements IDispatcher
 
     public function forgetPushed(): void
     {
-        foreach (/*$this->listeners*/[] as $key => $value) {
-            if (str_ends_with($key, '_pushed')) {
-                $this->forget($key);
-            }
-        }
     }
 
     public function hasListeners($eventName): bool
     {
-      return str_contains($eventName, "eloquent");
+      if (is_string($eventName)) {
+        return str_contains($eventName, "eloquent");
+      }
+      return $eventName instanceof QueryExecuted;
     }
 
     public function listen($events, $listener = null): void

@@ -8,7 +8,8 @@ use Touch\Models\Company;
 
 class CompanyController
 {
-    use Traits\HasViewTwig;
+    use Traits\HasViewTwig,
+      Traits\HasConnectionDatabase;
 
     public function index(ServerRequest $request, Response $response)
     {

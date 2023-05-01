@@ -13,6 +13,7 @@ use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use PDO;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Clockwork\ApiController as ClockworkController;
+use Touch\Core\Clockwork\TwigDataSource;
 use Touch\Core\Eloquent\DataSource as EloquentDataSource;
 use Touch\Core\Eloquent\Dispatcher as EloquentDispatcher;
 
@@ -29,13 +30,19 @@ class Application
 
     protected function clockInit()
     {
-        $dataSource = new EloquentDataSource(
-            Model::getConnectionResolver(),
-            Model::getEventDispatcher(),
-        );
       $this->clockwork = Clockwork::init(['register_helpers' => true]);
-        $dataSource->listenToEvents();
+
+      $dataSource = new EloquentDataSource(
+        Model::getConnectionResolver(),
+        Model::getEventDispatcher(),
+      );
+      $dataSource->listenToEvents();
       $this->clockwork->addDataSource($dataSource);
+
+      $dataSource = new TwigDataSource(app("twig"));
+      $dataSource->listenToEvents();
+      $this->clockwork->addDataSource($dataSource);
+
       $this->router->get(
         "/__clockwork/{request:.+}",
         controller(ClockworkController::class, "index")
@@ -50,6 +57,7 @@ class Application
         $pdo = new PDO("mysql:host=mysql;dbname=application", "erick", "1234");
         $conn = new Connection($pdo, 'application', '');
         $conn->setQueryGrammar(new MySqlGrammar());
+        $conn->setEventDispatcher($dispatcher);
         $resolver = new ConnectionResolver([
             "mysql" => $conn,
         ]);
