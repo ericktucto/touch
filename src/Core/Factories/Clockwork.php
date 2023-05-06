@@ -3,8 +3,9 @@
 namespace Touch\Core\Factories;
 
 use Clockwork\Support\Vanilla\Clockwork as VanillaClockwork;
-use IPub\SlimRouter\Routing\Router;
+use League\Route\Router;
 use Psr\Container\ContainerInterface;
+use Touch\Http\Response;
 
 class Clockwork
 {
@@ -15,8 +16,8 @@ class Clockwork
     $container
       ->get(Router::class)
       ->get(
-        "/__clockwork/{request:.+}",
-        fn($request, $response, $args) => $response->json(
+        "/__clockwork/{request}",
+        fn($request, $args) => Response::json(
           $clockwork->getMetadata($args["request"]) ?? [],
           200,
           JSON_FORCE_OBJECT

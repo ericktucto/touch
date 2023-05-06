@@ -12,7 +12,7 @@ function app(?string $resource = null)
 
 function controller(string $controller, $method)
 {
-  return "{$controller}:{$method}";
+  return "{$controller}::{$method}";
 }
 
 function request(ServerRequest $request)

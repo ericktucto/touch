@@ -3,25 +3,25 @@
 namespace Touch\Controllers;
 
 use GuzzleHttp\Psr7\ServerRequest;
-use IPub\SlimRouter\Http\Response;
+use Illuminate\Database\ConnectionResolverInterface;
+use Touch\Http\EngineTemplate;
+use Touch\Http\Response;
 use Touch\Models\Company;
 
 class CompanyController
 {
-    use Traits\HasViewTwig,
-      Traits\HasConnectionDatabase;
+  public function __construct(
+    protected ConnectionResolverInterface $conn,
+    protected EngineTemplate $view
+  ) {
+  }
 
-    public function __construct()
-    {
-      $this->conn();
-    }
+  public function index(ServerRequest $request)
+  {
+    $companies = Company::take(10)->get();
 
-    public function index(ServerRequest $request, Response $response)
-    {
-      $companies = Company::take(10)->get();
-
-      return $response->html(
-        $this->view("companies.index", compact("companies"))
-      );
-    }
+    return Response::html(
+      $this->view->render("companies.index", compact("companies"))
+    );
+  }
 }

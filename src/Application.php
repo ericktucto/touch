@@ -2,9 +2,9 @@
 
 namespace Touch;
 
-use IPub\SlimRouter\Routing\Router;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
+use League\Route\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Application
