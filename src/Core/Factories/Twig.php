@@ -12,8 +12,9 @@ class Twig
 {
   public static function create(ContainerInterface $container)
   {
+    clock($container->get("root"));
     $env = new Environment(
-      new FilesystemLoader($container->get("root") . "/views")
+      new FilesystemLoader($container->get("root") . "/../views")
     );
     $container->get(Clockwork::class)->addDataSource(self::getDataSource($env));
     return $env;
