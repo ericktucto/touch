@@ -2,9 +2,9 @@
 
 namespace Touch\Controllers;
 
-use GuzzleHttp\Psr7\ServerRequest;
 use Illuminate\Database\ConnectionResolverInterface;
 use Touch\Http\EngineTemplate;
+use Touch\Http\Request;
 use Touch\Http\Response;
 use Touch\Models\Company;
 
@@ -16,7 +16,7 @@ class CompanyController
   ) {
   }
 
-  public function index(ServerRequest $request)
+  public function index(Request $request)
   {
     $companies = Company::take(10)->get();
 

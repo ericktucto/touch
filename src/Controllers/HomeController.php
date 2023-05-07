@@ -2,8 +2,8 @@
 
 namespace Touch\Controllers;
 
-use GuzzleHttp\Psr7\ServerRequest;
 use Touch\Http\EngineTemplate;
+use Touch\Http\Request;
 use Touch\Http\Response;
 
 class HomeController
@@ -12,15 +12,15 @@ class HomeController
   {
   }
 
-  public function index(ServerRequest $request)
+  public function index(Request $request)
   {
-    $nombre = request($request)->query("nombre", "¿cual es tu nombre ?");
+    $nombre = $request->query("nombre", "¿cual es tu nombre ?");
 
     return Response::html($this->view->render("index", compact("nombre")));
   }
-  public function enviar(ServerRequest $request)
+  public function enviar(Request $request)
   {
-    $name = request($request)->body("name");
+    $name = $request->body("name");
     return Response::json(["message" => "Hola {$name}"]);
   }
 }

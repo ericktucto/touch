@@ -3,21 +3,25 @@
 namespace Touch\Http;
 
 use GuzzleHttp\Psr7\ServerRequest;
+use Psr\Http\Message\ServerRequestInterface;
 
-class Request implements Contracts\Request
+class Request extends ServerRequest implements ServerRequestInterface
 {
-    public function __construct(protected ServerRequest $request)
-    {}
+  public function query(string $input, $default = null)
+  {
+    $query = $this->getQueryParams();
+    return $query[$input] ?? $default;
+  }
 
-    public function query(string $input, $default = null)
-    {
-        $query = $this->request->getQueryParams();
-        return $query[$input] ?? $default;
+  public function body(string $input, $default = null)
+  {
+    $body = $this->getBody();
+    $data = json_decode($body->read($body->getSize()));
+
+    if (is_null($data) || !property_exists($data, $input)) {
+      return $default;
     }
 
-    public function body(string $input, $default = null)
-    {
-        $query = $this->request->getParsedBody();
-        return $query[$input] ?? $default;
-    }
+    return $data->{$input};
+  }
 }

@@ -13,7 +13,7 @@ class Response
     return $response;
   }
 
-  public static function json(array $data, int $status = 200): GuzzleResponse
+  public static function json(array|object $data, int $status = 200): GuzzleResponse
   {
     header("Content-Type: application/json; charset=utf-8");
     $json = json_encode($data);
@@ -23,3 +23,4 @@ class Response
     return $response;
   }
 }
+
