@@ -23,9 +23,11 @@ class Twig
     ContainerInterface $container,
     Config $config
   ): string {
-    $path = match (strpos($config->get("views"), "/")) {
-      0 => $config->get("views"),
-      default => "{$container->get('path')}/{$config->get("views")}",
+    $name = $config->get("views", "views");
+    $projectPath = $container->get('path');
+    $path = match (strpos($name, "/")) {
+      0 => $name,
+      default => "{$projectPath}/{$name}",
     };
     // delete "/" on end string
     return preg_replace("/\/$/", "", $path);

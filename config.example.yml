@@ -1,2 +1,9 @@
-view: "./views"
+view: "./views" # optional
+databases:
+  mysql:
+    driver: mysql
+    host: localhost
+    dbname: application
+    user: root
+    password:
 
