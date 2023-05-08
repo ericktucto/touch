@@ -28,6 +28,8 @@
         "guzzlehttp/psr7": "2.6.x-dev",
         "ipub/slim-router": "dev-master",
         "league/event": "^3.0@dev",
-        "league/route": "6.x-dev"
+        "league/route": "6.x-dev",
+        "symfony/yaml": "6.3.x-dev",
+        "hassankhan/config": "3.1.*"
     }
 }
