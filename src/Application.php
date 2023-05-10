@@ -3,6 +3,7 @@
 namespace Touch;
 
 use Clockwork\Support\Vanilla\Clockwork;
+use DI\Container;
 use League\Route\Router;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Kernel;
@@ -27,6 +28,11 @@ class Application
       /** @var Application $app */
       $app = static::$kernel->getContainer()->make(Application::class);
       return $app;
+    }
+
+    public static function getContainer(): Container
+    {
+      return static::$kernel->getContainer();
     }
 
     public function route()
