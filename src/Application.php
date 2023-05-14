@@ -74,8 +74,12 @@ class Application
 
     public function run()
     {
-        $response = $this->router->handle($this->server);
+      // send response
+      // TODO: METHOD_NOT_ALLOWED
+      $response = $this->router->handle($this->server);
+      (new Emitter())->emit($response);
+
+      // using clockwork
       if ($this->isLocal()) $this->clockwork->requestProcessed();
-        (new Emitter())->emit($response);
     }
 }
