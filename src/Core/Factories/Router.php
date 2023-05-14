@@ -2,9 +2,9 @@
 
 namespace Touch\Core\Factories;
 
-use League\Route\Router as LeagueRouter;
 use League\Route\Strategy\ApplicationStrategy;
 use Psr\Container\ContainerInterface;
+use Touch\Http\Router as HttpRouter;
 
 class Router
 {
@@ -13,7 +13,7 @@ class Router
     $strategy = new ApplicationStrategy();
     $strategy->setContainer($container);
 
-    $router = new LeagueRouter();
+    $router = new HttpRouter();
     $router->setStrategy($strategy);
     return $router;
   }

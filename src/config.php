@@ -2,7 +2,6 @@
 
 use Clockwork\Support\Vanilla\Clockwork;
 use Illuminate\Database\ConnectionResolverInterface;
-use League\Route\Router;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Factories\{
   Clockwork as ClockworkFactory,
@@ -13,6 +12,7 @@ use Touch\Core\Factories\{
   Twig as TwigFactory
 };
 use Touch\Http\EngineTemplate;
+use Touch\Http\Router;
 
 use function DI\factory;
 

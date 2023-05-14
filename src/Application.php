@@ -4,10 +4,11 @@ namespace Touch;
 
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
-use League\Route\Router;
 use Lune\Http\Emitter\ResponseEmitter as Emitter;
 use Psr\Http\Message\ServerRequestInterface;
+use Touch\Core\Clockwork\DataSource\ApplicationDataSource;
 use Touch\Core\Kernel;
+use Touch\Http\Router;
 
 class Application
 {
@@ -44,7 +45,13 @@ class Application
       $whoops = new \Whoops\Run;
       $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
       $whoops->register();
-      $this->clockwork = $this->getContainer()->get(Clockwork::class);
+      /** @var Clockwork $clockwork */
+      $clockwork = $this->getContainer()->get(Clockwork::class);
+      $this->clockwork = $clockwork;
+      $this->clockwork
+        ->addDataSource(
+          new ApplicationDataSource($this->router, $this->getContainer())
+        );
     }
 
     public static function create(Kernel $kernel): Application

@@ -2,13 +2,13 @@
 
 namespace Touch\Http;
 
-use League\Route\RouteGroup;
+use League\Route\Router as LeagueRouter;
 
-abstract class Router
+class Router extends LeagueRouter
 {
-  abstract protected function routes(RouteGroup $group);
-  public function __invoke(RouteGroup $group)
+  public function getRouteData()
   {
-    $this->routes($group);
+    return $this->routeCollector->getData();
   }
 }
+

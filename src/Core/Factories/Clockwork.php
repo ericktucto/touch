@@ -3,14 +3,15 @@
 namespace Touch\Core\Factories;
 
 use Clockwork\Support\Vanilla\Clockwork as VanillaClockwork;
-use League\Route\Router;
 use Psr\Container\ContainerInterface;
 use Touch\Http\Response;
+use Touch\Http\Router;
 
 class Clockwork
 {
   public static function create(ContainerInterface $container)
   {
+    /** @var VanillaClockwork $clockwork */
     $clockwork = VanillaClockwork::init(["register_helpers" => true]);
 
     $container
