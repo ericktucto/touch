@@ -5,6 +5,7 @@ namespace Touch;
 use Clockwork\Support\Vanilla\Clockwork;
 use DI\Container;
 use League\Route\Router;
+use Lune\Http\Emitter\ResponseEmitter as Emitter;
 use Psr\Http\Message\ServerRequestInterface;
 use Touch\Core\Kernel;
 
@@ -44,6 +45,6 @@ class Application
     {
         $response = $this->router->handle($this->server);
         $this->clockwork->requestProcessed();
-        echo $response->getBody();
+        (new Emitter())->emit($response);
     }
 }

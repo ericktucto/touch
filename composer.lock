@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a714ad9d281caa3b49930ada57ded24e",
+    "content-hash": "af4af28e7339bf29f3661d79568b8548",
     "packages": [
         {
             "name": "brick/math",
@@ -1079,6 +1079,48 @@
                 }
             ],
             "time": "2021-07-21T07:29:19+00:00"
+        },
+        {
+            "name": "lune/http-emitter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lunephp/http-emitter.git",
+                "reference": "e7a996256d5a283414afc7b85220558a951cfcf3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lunephp/http-emitter/zipball/e7a996256d5a283414afc7b85220558a951cfcf3",
+                "reference": "e7a996256d5a283414afc7b85220558a951cfcf3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "psr/http-message": "^1.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lune\\Http\\Emitter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Willem Wollebrants",
+                    "email": "willem@studiow.be"
+                }
+            ],
+            "description": "Emit psr-7 responses ",
+            "support": {
+                "issues": "https://github.com/lunephp/http-emitter/issues",
+                "source": "https://github.com/lunephp/http-emitter/tree/master"
+            },
+            "time": "2019-01-02T08:50:56+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3450,7 +3492,8 @@
         "ipub/slim-router": 20,
         "league/event": 20,
         "league/route": 20,
-        "symfony/yaml": 20
+        "symfony/yaml": 20,
+        "lune/http-emitter": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

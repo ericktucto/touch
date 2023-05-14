@@ -15,12 +15,11 @@ class Response
 
   public static function json(array|object $data, int $status = 200): GuzzleResponse
   {
-    header("Content-Type: application/json; charset=utf-8");
-    $json = json_encode($data);
-    $response = new GuzzleResponse($status, [
-      "Content-Type" => "application/json",
-    ], $json);
-    return $response;
+    return new GuzzleResponse(
+      $status,
+      [ "Content-Type" => "application/json; charset=utf-8", ],
+      json_encode($data)
+    );
   }
 }
 

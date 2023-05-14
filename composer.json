@@ -30,6 +30,7 @@
         "league/event": "^3.0@dev",
         "league/route": "6.x-dev",
         "symfony/yaml": "6.3.x-dev",
-        "hassankhan/config": "3.1.*"
+        "hassankhan/config": "3.1.*",
+        "lune/http-emitter": "dev-master"
     }
 }
