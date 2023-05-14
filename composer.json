@@ -19,19 +19,18 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php-di/php-di": "^7.0@beta",
-        "illuminate/database": "8.x-dev",
+        "php-di/php-di": "^7.0",
+        "illuminate/database": "^10.10",
         "filp/whoops": "^2.15",
         "twig/twig": "^3.0",
-        "itsgoingd/clockwork": "dev-master",
-        "symfony/var-dumper": "6.3.x-dev",
-        "guzzlehttp/psr7": "2.6.x-dev",
-        "ipub/slim-router": "dev-master",
-        "league/event": "^3.0@dev",
-        "league/route": "6.x-dev",
-        "symfony/yaml": "6.3.x-dev",
-        "hassankhan/config": "3.1.*",
+        "itsgoingd/clockwork": "^5.1",
+        "symfony/var-dumper": "^6.3",
+        "guzzlehttp/psr7": "^2.6",
+        "league/event": "^3.0",
+        "league/route": "^6.0",
+        "symfony/yaml": "^6.3",
+        "hassankhan/config": "^3.1",
         "lune/http-emitter": "dev-master",
-        "vlucas/valitron": "1.4.*"
+        "vlucas/valitron": "^1.4"
     }
 }
