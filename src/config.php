@@ -9,7 +9,8 @@ use Touch\Core\Factories\{
   EngineTemplate as EngineTemplateFactory,
   Router as RouterFactory,
   ServerRequest as ServerRequestFactory,
-  Twig as TwigFactory
+  Twig as TwigFactory,
+  Whoops as WhoopsFactory,
 };
 use Touch\Http\EngineTemplate;
 use Touch\Http\Router;
@@ -27,4 +28,5 @@ return [
   EngineTemplate::class => factory([EngineTemplateFactory::class, "create"]),
   "twig" => factory([TwigFactory::class, "create"]),
   "root" => fn() => __DIR__,
+  "whoops" => factory([WhoopsFactory::class, "create"]),
 ];
