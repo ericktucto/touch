@@ -24,13 +24,13 @@
         "filp/whoops": "^2.15",
         "twig/twig": "^3.0",
         "itsgoingd/clockwork": "^5.1",
-        "symfony/var-dumper": "^6.3",
-        "guzzlehttp/psr7": "^2.6",
+        "symfony/var-dumper": "^6.2",
+        "guzzlehttp/psr7": "^2.5",
         "league/event": "^3.0",
-        "league/route": "^6.0",
-        "symfony/yaml": "^6.3",
+        "league/route": "^5.1",
+        "symfony/yaml": "^6.2",
         "hassankhan/config": "^3.1",
-        "lune/http-emitter": "dev-master",
+        "lune/http-emitter": "^0.0",
         "vlucas/valitron": "^1.4"
     }
 }

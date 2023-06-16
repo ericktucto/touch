@@ -3,6 +3,7 @@
 namespace Touch\Http;
 
 use Twig\Environment;
+use Touch\Http\Response;
 
 class EngineTemplate
 {
@@ -11,7 +12,8 @@ class EngineTemplate
   }
   public function render(string $view, array $data = [])
   {
-    $view = str_replace(".", "/", $view) . ".twig";
-    return $this->twig->render($view, $data);
+    $name = str_replace(".", "/", $view) . ".twig";
+    $view = $this->twig->render($name, $data);
+    return Response::html($view);
   }
 }
