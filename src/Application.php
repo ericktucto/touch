@@ -42,9 +42,7 @@ class Application
 
     protected function createServicesToDevelopment()
     {
-      $whoops = new \Whoops\Run;
-      $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-      $whoops->register();
+      $this->getContainer()->get("whoops");
       /** @var Clockwork $clockwork */
       $clockwork = $this->getContainer()->get(Clockwork::class);
       $this->clockwork = $clockwork;
