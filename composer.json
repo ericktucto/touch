@@ -1,7 +1,18 @@
 {
     "name": "erick/touch",
-    "description": "Mi primer framework",
-    "type": "project",
+    "description": "Microframework for web applications",
+    "version": "1.0.0-alpha",
+    "type": "library",
+    "keywords": [
+      "microframework",
+      "framework",
+      "php",
+      "touch",
+      "web",
+      "applications",
+      "rest",
+      "api"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
