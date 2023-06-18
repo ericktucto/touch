@@ -5,8 +5,8 @@ Microframework PHP, create to web applications with Touch
 
   - [Install with Composer](#install-with-composer)
   - [Steps to create basic application](#steps-to-create-basic-application)
-    - [1. Create config.yml](#1--create--config-yml)
-    - [2. Create index.php file](#2--create-index--php-file)
+    - [1. Create config.yml](#1-create-configyml)
+    - [2. Create index.php file](#2-create-indexphp-file)
 
 ## Install with Composer
 ```bash
