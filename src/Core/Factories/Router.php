@@ -8,13 +8,13 @@ use Touch\Http\Router as HttpRouter;
 
 class Router
 {
-  public static function create(ContainerInterface $container)
-  {
-    $strategy = new ApplicationStrategy();
-    $strategy->setContainer($container);
+    public static function create(ContainerInterface $container)
+    {
+        $strategy = new ApplicationStrategy();
+        $strategy->setContainer($container);
 
-    $router = new HttpRouter();
-    $router->setStrategy($strategy);
-    return $router;
-  }
+        $router = new HttpRouter();
+        $router->setStrategy($strategy);
+        return $router;
+    }
 }

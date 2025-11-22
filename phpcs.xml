@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="Erick Tucto">
+    <description>Security reviews with PHPCS.</description>
+
+    <file>.</file>
+
+    <!-- Exclude the Composer Vendor directory. -->
+    <exclude-pattern>/vendor/*</exclude-pattern>
+
+    <!-- Exclude the Node Modules directory. -->
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+
+    <!-- wpcs installed path -->
+    <config name="installed_paths" value="~/.config/nvim/lib/phpcs/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis" />
+
+    <!-- Just check php files -->
+    <arg name="extensions" value="php"/>
+
+    <rule ref="PSR12"/>
+    <rule ref="VariableAnalysis"/>
+</ruleset>
+

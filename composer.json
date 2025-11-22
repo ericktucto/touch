@@ -1,47 +1,55 @@
 {
-    "name": "erick/touch",
-    "description": "Microframework for web applications",
-    "version": "1.0.0-alpha",
-    "type": "library",
-    "keywords": [
-      "microframework",
-      "framework",
-      "php",
-      "touch",
-      "web",
-      "applications",
-      "rest",
-      "api"
-    ],
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Touch\\": "src/"
-        },
-        "files": [
-            "helpers.php"
-        ]
+  "name": "erick/touch",
+  "description": "Microframework for web applications",
+  "version": "1.0.0-alpha",
+  "type": "library",
+  "keywords": [
+    "microframework",
+    "framework",
+    "php",
+    "touch",
+    "web",
+    "applications",
+    "rest",
+    "api"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lint:php": "vendor/bin/phpcs --standard=PSR12 src/",
+    "fix:php": "vendor/bin/phpcbf --standard=PSR12 src/"
+  },
+  "autoload": {
+    "psr-4": {
+      "Touch\\": "src/"
     },
-    "authors": [
-        {
-            "name": "Erick Tucto",
-            "email": "erick@ericktucto.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "php-di/php-di": "^7.0",
-        "illuminate/database": "^10.10",
-        "filp/whoops": "^2.15",
-        "twig/twig": "^3.0",
-        "itsgoingd/clockwork": "^5.1",
-        "symfony/var-dumper": "^6.2",
-        "guzzlehttp/psr7": "^2.5",
-        "league/event": "^3.0",
-        "league/route": "^5.1",
-        "symfony/yaml": "^6.2",
-        "hassankhan/config": "^3.1",
-        "lune/http-emitter": "^0.0",
-        "vlucas/valitron": "^1.4"
+    "files": [
+      "helpers.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Erick Tucto",
+      "email": "erick@ericktucto.com"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php-di/php-di": "^7.0",
+    "illuminate/database": "^10.10",
+    "filp/whoops": "^2.15",
+    "twig/twig": "^3.0",
+    "itsgoingd/clockwork": "^5.1",
+    "symfony/var-dumper": "^6.2",
+    "guzzlehttp/psr7": "^2.5",
+    "league/event": "^3.0",
+    "league/route": "^5.1",
+    "symfony/yaml": "^6.2",
+    "hassankhan/config": "^3.1",
+    "lune/http-emitter": "^0.0",
+    "vlucas/valitron": "^1.4"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^4.0",
+    "sirbrillig/phpcs-variable-analysis": "^2.0"
+  }
 }

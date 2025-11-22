@@ -7,8 +7,8 @@ use Touch\Http\EngineTemplate as HttpEngineTemplate;
 
 class EngineTemplate
 {
-  public static function create(ContainerInterface $container)
-  {
-    return new HttpEngineTemplate($container->get("twig"));
-  }
+    public static function create(ContainerInterface $container)
+    {
+        return new HttpEngineTemplate($container->get("twig"));
+    }
 }

@@ -13,35 +13,35 @@ use Twig\Profiler\Profile;
 class TwigDataSource extends DataSource
 {
   // Twig environment instance
-  protected $twig;
+    protected $twig;
 
   // Twig profile instance
-  protected $profile;
+    protected $profile;
 
   // Create a new data source, takes Twig instance as an argument
-  public function __construct(Environment $twig)
-  {
-    $this->twig = $twig;
-  }
+    public function __construct(Environment $twig)
+    {
+        $this->twig = $twig;
+    }
 
   // Register the Twig profiler extension
-  public function listenToEvents()
-  {
-    $this->twig->addExtension(
-      new ProfilerExtension(($this->profile = new Profile()))
-    );
-  }
+    public function listenToEvents()
+    {
+        $this->twig->addExtension(
+            new ProfilerExtension(($this->profile = new Profile()))
+        );
+    }
 
   // Adds rendered views to the request
-  public function resolve(Request $request)
-  {
-    $timeline = (new ProfilerClockworkDumper())->dump($this->profile);
+    public function resolve(Request $request)
+    {
+        $timeline = (new ProfilerClockworkDumper())->dump($this->profile);
 
-    $request->viewsData = array_merge(
-      $request->viewsData,
-      $timeline->finalize()
-    );
+        $request->viewsData = array_merge(
+            $request->viewsData,
+            $timeline->finalize()
+        );
 
-    return $request;
-  }
+        return $request;
+    }
 }
