@@ -50,6 +50,7 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^4.0",
-    "sirbrillig/phpcs-variable-analysis": "^2.0"
+    "sirbrillig/phpcs-variable-analysis": "^2.0",
+    "friendsofphp/php-cs-fixer": "dev-master"
   }
 }
