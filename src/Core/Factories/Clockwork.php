@@ -4,6 +4,8 @@ namespace Touch\Core\Factories;
 
 use Clockwork\Support\Vanilla\Clockwork as VanillaClockwork;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Touch\Http\Response;
 use Touch\Http\Router;
 
@@ -25,16 +27,16 @@ class Clockwork
             ->get(Router::class)
             ->get(
                 "/__clockwork/app[/{file:.*}]",
-                fn($request) => $clockwork->usePsrMessage($request, Response::html(''))->returnWeb(),
+                // @todo: return web
+                fn(ServerRequestInterface $request): mixed => $clockwork->usePsrMessage($request, Response::html(''))->returnWeb(),
             );
         $container
         ->get(Router::class)
         ->get(
             "/__clockwork/{request:.+}",
-            fn($request, $args) => Response::json(
+            fn(ServerRequestInterface $request, array $args): ResponseInterface => Response::json(
                 $clockwork->getMetadata($args["request"]) ?? [],
                 200,
-                JSON_FORCE_OBJECT,
             ),
         );
         return $clockwork;
