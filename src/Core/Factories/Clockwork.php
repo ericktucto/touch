@@ -11,12 +11,13 @@ class Clockwork
 {
     public static function create(ContainerInterface $container): VanillaClockwork
     {
+        $path = $container->get("config")->get("app.project_dir");
         /** @var VanillaClockwork $clockwork */
         $clockwork = VanillaClockwork::init([
             "register_helpers" => true,
             "web" => [
                 "enable" => '/__clockwork/app',
-                "path" => __DIR__ . "/public/vendor/clockwork",
+                "path" => $path . "/clockwork/web",
             ],
         ]);
 

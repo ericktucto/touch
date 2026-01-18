@@ -20,11 +20,11 @@ class Kernel
         $builder = new ContainerBuilder();
         $builder->addDefinitions(__DIR__ . "/../config.php");
         $builder->addDefinitions([
-        "config" => factory([ConfigFactory::class, "create"])->parameter(
-            "path",
-            $this->projectPath . "/config.yml"
-        ),
-        "path" => fn () => $this->projectPath,
+            "config" => factory([ConfigFactory::class, "create"])->parameter(
+                "path",
+                $this->projectPath . "/config.yml",
+            ),
+            "path" => fn() => $this->projectPath,
         ]);
         $this->container = $builder->build();
     }

@@ -6,6 +6,7 @@ use Clockwork\Support\Vanilla\Clockwork;
 use Illuminate\Database\{Connection, ConnectionResolver};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Grammars\MySqlGrammar;
+use Illuminate\Database\Query\Grammars\SQLiteGrammar;
 use PDO;
 use Psr\Container\ContainerInterface;
 use Touch\Core\Clockwork\DataSource\EloquentDataSource;
@@ -57,6 +58,9 @@ class EloquentConnection
                 "mysql" => static::buildMysqlConnection(
                     $configDb
                 ),
+                "sqlite" => static::buildSqliteConnection(
+                    $configDb
+                ),
             };
 
             $conn->setEventDispatcher($dispatcher);
@@ -75,6 +79,15 @@ class EloquentConnection
         $pdo = new PDO("mysql:host={$host};dbname={$dbname}", $user, $password);
         $conn = new Connection($pdo, $dbname);
         $conn->setQueryGrammar(new MySqlGrammar());
+        return $conn;
+    }
+
+    protected static function buildSqliteConnection(array $config): Connection
+    {
+        $path = $config["path"];
+        $pdo = new PDO("sqlite:{$path}");
+        $conn = new Connection($pdo);
+        $conn->setQueryGrammar(new SQLiteGrammar());
         return $conn;
     }
 

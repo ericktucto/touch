@@ -11,10 +11,14 @@ class Config
 {
     protected static array $allowed_environment = ["local", "production"];
 
-    public static function create(string $path, ContainerInterface $container)
-    {
+    public static function create(
+        string $path,
+        ContainerInterface $container,
+    ): NoodlehausConfig {
         static::checkExistsConfig($path, $container);
         $config = NoodlehausConfig::load($path);
+        $project_dir = dirname($path);
+        $config->set('app.project_dir', $project_dir);
         static::checkStructConfig($config, $container);
         return $config;
     }
@@ -23,7 +27,7 @@ class Config
     {
         if (
             !$config->has("env")
-            || !in_array($config->get("env"), static::$allowed_environment)
+            || !in_array($config->get("env"), static::$allowed_environment, true)
         ) {
             $container->get("whoops");
             throw new BadStructBasicConfig(
