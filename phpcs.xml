@@ -10,9 +10,6 @@
     <!-- Exclude the Node Modules directory. -->
     <exclude-pattern>/node_modules/*</exclude-pattern>
 
-    <!-- wpcs installed path -->
-    <config name="installed_paths" value="~/.config/nvim/lib/phpcs/vendor/sirbrillig/phpcs-variable-analysis/VariableAnalysis" />
-
     <!-- Just check php files -->
     <arg name="extensions" value="php"/>
 

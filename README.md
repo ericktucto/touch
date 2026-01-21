@@ -56,6 +56,15 @@ Create your routing web applications
 <?php
 // code ...
 $app->route()->get("/", fn () => Response::html("My index"));
+$app->router()->get("/login", [AuthController::class, "login"]);
+// AuthController.php
+class AuthController
+{
+    public function login(Request $request)
+    {
+        // code..
+    }
+}
 ```
 To more infor, you'll visit [docs][routing-doc] of The php league's Routing. But Touch have some interesed features.
 

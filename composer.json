@@ -26,6 +26,11 @@
       "helpers.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Touch\\Tests\\": "tests/"
+    }
+  },
   "authors": [
     {
       "name": "Erick Tucto",
@@ -47,12 +52,17 @@
     "symfony/yaml": "^6.2",
     "hassankhan/config": "^3.1",
     "lune/http-emitter": "^0.0",
-    "vlucas/valitron": "^1.4"
+    "vlucas/valitron": "^1.4",
+    "nyholm/psr7": "^1.8@dev",
+    "psr/http-message": "^1.1",
+    "http-interop/http-factory-guzzle": "dev-master"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^4.0",
     "sirbrillig/phpcs-variable-analysis": "^2.0",
     "friendsofphp/php-cs-fixer": "dev-master",
-    "vimeo/psalm": "^7.0@dev"
+    "vimeo/psalm": "^7.0@dev",
+    "phpunit/phpunit": "^12",
+    "helmich/phpunit-json-assert": "dev-master"
   }
 }
