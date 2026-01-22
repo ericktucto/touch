@@ -10,6 +10,7 @@ class Response
     {
         $response = new GuzzleResponse($status, ["Content-type" => "text/html"]);
         $response->getBody()->write($html);
+        $response->getBody()->rewind();
         return $response;
     }
 
@@ -18,7 +19,7 @@ class Response
         return new GuzzleResponse(
             $status,
             [ "Content-Type" => "application/json; charset=utf-8", ],
-            json_encode($data)
+            json_encode($data),
         );
     }
 }
