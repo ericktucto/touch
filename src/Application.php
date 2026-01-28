@@ -41,9 +41,14 @@ class Application
         };
     }
 
-    protected function createServicesToDevelopment()
+    protected function createServicesToDevelopment(): void
     {
-        $this->getContainer()->get("whoops");
+        if ($this->isLocal()) {
+            return;
+        }
+        if ($this->getContainer()->has('whoops')) {
+            $this->getContainer()->get("whoops");
+        }
         /** @var Clockwork $clockwork */
         $clockwork = $this->getContainer()->get(Clockwork::class);
         $this->clockwork = $clockwork;
@@ -61,6 +66,7 @@ class Application
         /** @var Application $app */
         $app = $kernel->getContainer()->make(Application::class);
         $app->kernel = $kernel;
+        $app->createServicesToDevelopment();
         return $app;
     }
 
@@ -81,9 +87,6 @@ class Application
 
     public function run()
     {
-        if ($this->isLocal()) {
-            $this->createServicesToDevelopment();
-        }
         // send response
         // TODO: METHOD_NOT_ALLOWED
         $response = $this->router->handle($this->server);

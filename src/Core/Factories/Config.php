@@ -35,7 +35,6 @@ class Config
     ): void {
         $definitions = $config->get('definitions');
         if (!is_array($definitions)) {
-            $container->get("whoops");
             throw new BadStructBasicConfig(
                 "definitions key must be array",
                 1,
@@ -45,7 +44,6 @@ class Config
         foreach ($definitions as $file) {
             $pathFile = "{$path}/{$file}";
             if (!file_exists($pathFile)) {
-                $container->get("whoops");
                 throw new BadStructBasicConfig(
                     "Not exists definitions file: {$pathFile}",
                     1,
@@ -64,7 +62,6 @@ class Config
             !$config->has("env")
             || !in_array($config->get("env"), static::$allowed_environment, true)
         ) {
-            $container->get("whoops");
             throw new BadStructBasicConfig(
                 "Not Found Config 'env', please create 'env' key in config and use values 'local' or 'production'",
                 1,
@@ -76,7 +73,6 @@ class Config
         if (file_exists($path)) {
             return $path;
         }
-        $container->get("whoops");
         throw new NotExistsConfig("Error Processing Request", 1);
     }
 }

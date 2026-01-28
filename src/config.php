@@ -24,12 +24,13 @@ use function DI\factory;
 return [
     ResponseFactoryInterface::class => fn() => new ResponseFactory(),
     Router::class => factory([RouterFactory::class, "create"]),
+    ServerRequestInterface::class => factory([ServerRequestFactory::class, "create"]),
+    // @todo DEPENDECIES TO PLUGINS:
     ConnectionResolverInterface::class => factory([
         EloquentConnectionFactory::class,
         "create",
     ]),
     Clockwork::class => factory([ClockworkFactory::class, "create"]),
-    ServerRequestInterface::class => factory([ServerRequestFactory::class, "create"]),
     EngineTemplate::class => factory([EngineTemplateFactory::class, "create"]),
     "twig" => factory([TwigFactory::class, "create"]),
     "root" => fn() => __DIR__,
