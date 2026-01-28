@@ -18,7 +18,7 @@ class Kernel
     public function __construct(?string $projectPath = null)
     {
         $filePath = debug_backtrace()[0]["file"];
-        $this->projectPath = $projectPath ?? dirname(dirname($filePath));
+        $this->projectPath = $this->makePath($projectPath ?? dirname(dirname($filePath)));
 
         $builder = new ContainerBuilder();
         $builder->addDefinitions(__DIR__ . "/../config.php");
@@ -30,6 +30,29 @@ class Kernel
             "path" => fn() => $this->projectPath,
         ]);
         $this->builder = $builder;
+    }
+
+    protected function makePath(string $path): string
+    {
+        if (is_file($path)) {
+            return dirname($path);
+        }
+        return $path;
+    }
+
+    public function add(string $alias, string $factoryName): void
+    {
+        $factory = factory([$factoryName, "create"]);
+
+        $this->builder
+            ->addDefinitions([
+                $alias => $factory,
+            ]);
+    }
+
+    public function getBuilder(): ContainerBuilder
+    {
+        return $this->builder;
     }
 
     public function build(): void

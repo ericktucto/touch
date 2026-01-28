@@ -56,6 +56,8 @@ class Application
     public static function create(Kernel $kernel): Application
     {
         $kernel->build();
+        $kernel->getContainer()->get('config');
+
         /** @var Application $app */
         $app = $kernel->getContainer()->make(Application::class);
         $app->kernel = $kernel;

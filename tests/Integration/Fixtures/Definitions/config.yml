@@ -1,0 +1,4 @@
+env: local
+definitions:
+  - ./config.foo.php
+

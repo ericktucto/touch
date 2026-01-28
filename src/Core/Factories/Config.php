@@ -20,7 +20,42 @@ class Config
         $project_dir = dirname($path);
         $config->set('app.project_dir', $project_dir);
         static::checkStructConfig($config, $container);
+
+        // EXIST MORE DEFINITIONS
+        if ($config->has('definitions')) {
+            static::addDefinitions($config, $container);
+        }
+
         return $config;
+    }
+
+    public static function addDefinitions(
+        NoodlehausConfig $config,
+        ContainerInterface $container,
+    ): void {
+        $definitions = $config->get('definitions');
+        if (!is_array($definitions)) {
+            $container->get("whoops");
+            throw new BadStructBasicConfig(
+                "definitions key must be array",
+                1,
+            );
+        }
+        $path = $container->get('path');
+        foreach ($definitions as $file) {
+            $pathFile = "{$path}/{$file}";
+            if (!file_exists($pathFile)) {
+                $container->get("whoops");
+                throw new BadStructBasicConfig(
+                    "Not exists definitions file: {$pathFile}",
+                    1,
+                );
+            }
+            $values = require $pathFile;
+            foreach ($values as $alias => $factory) {
+                $container->set($alias, $factory);
+            }
+        }
     }
 
     public static function checkStructConfig(NoodlehausConfig $config, ContainerInterface $container)
