@@ -19,7 +19,7 @@ class DefinitionTest extends TestCase
             'local',
             $kernel1->getContainer()->get('config')->get('env'),
         );
-        $kernel2 = new Kernel('./tests/Integration/Fixtures/config.yml');
+        $kernel2 = new Kernel('./tests/Integration/Fixtures/config.prod.yml');
         $kernel2->build();
         $this->assertEquals(
             'production',

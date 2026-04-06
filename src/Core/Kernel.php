@@ -13,19 +13,23 @@ class Kernel
 {
     protected ?Container $container = null;
     protected string $projectPath;
+    protected string $nameConfig;
     protected ContainerBuilder $builder;
 
     public function __construct(?string $projectPath = null)
     {
-        $filePath = debug_backtrace()[0]["file"];
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        $filePath = $trace[0]['file'] ?? throw new Exception('Invalid file path');
+
         $this->projectPath = $this->makePath($projectPath ?? dirname(dirname($filePath)));
+        $this->nameConfig = $projectPath === null || is_dir($projectPath) ? "config.yml" : basename($projectPath);
 
         $builder = new ContainerBuilder();
         $builder->addDefinitions(__DIR__ . "/../config.php");
         $builder->addDefinitions([
             "config" => factory([ConfigFactory::class, "create"])->parameter(
                 "path",
-                $this->projectPath . "/config.yml",
+                "{$this->projectPath}/{$this->nameConfig}",
             ),
             "path" => fn() => $this->projectPath,
         ]);

@@ -9,7 +9,7 @@ use Touch\Exceptions\NotExistsConfig;
 
 class Config
 {
-    protected static array $allowed_environment = ["local", "production"];
+    protected static array $allowed_environment = ["local", "production", "testing"];
 
     public static function create(
         string $path,
