@@ -37,7 +37,8 @@
       "email": "erick@ericktucto.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "require": {
     "php": "^8.4",
     "php-di/php-di": "^7.0",
@@ -53,16 +54,16 @@
     "hassankhan/config": "^3.1",
     "lune/http-emitter": "^0.0",
     "vlucas/valitron": "^1.4",
-    "nyholm/psr7": "^1.8@dev",
+    "nyholm/psr7": "^1.8",
     "psr/http-message": "^1.1",
     "http-interop/http-factory-guzzle": "^1.2.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^4.0",
     "sirbrillig/phpcs-variable-analysis": "^2.0",
-    "friendsofphp/php-cs-fixer": "dev-master",
-    "vimeo/psalm": "^7.0@dev",
     "phpunit/phpunit": "^12",
-    "helmich/phpunit-json-assert": "dev-master"
+    "friendsofphp/php-cs-fixer": "^3.94",
+    "helmich/phpunit-json-assert": "^3.5",
+    "vimeo/psalm": "^6.16"
   }
 }
