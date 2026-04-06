@@ -1,7 +1,6 @@
 {
   "name": "erick/touch",
   "description": "Microframework for web applications",
-  "version": "1.0.0-alpha",
   "type": "library",
   "keywords": [
     "microframework",
