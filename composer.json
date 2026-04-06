@@ -21,10 +21,7 @@
   "autoload": {
     "psr-4": {
       "Touch\\": "src/"
-    },
-    "files": [
-      "helpers.php"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
