@@ -16,7 +16,7 @@ class DefinitionTest extends TestCase
         $kernel1 = new Kernel('./tests/Integration/Fixtures/Definitions');
         $kernel1->build();
         $this->assertEquals(
-            'local',
+            'testing',
             $kernel1->getContainer()->get('config')->get('env'),
         );
         $kernel2 = new Kernel('./tests/Integration/Fixtures/config.prod.yml');

@@ -63,7 +63,7 @@ class Config
             || !in_array($config->get("env"), static::$allowed_environment, true)
         ) {
             throw new BadStructBasicConfig(
-                "Not Found Config 'env', please create 'env' key in config and use values 'local' or 'production'",
+                "Not Found Config 'env', please create 'env' key in config and use values 'local', 'testing' or 'production'",
                 1,
             );
         }

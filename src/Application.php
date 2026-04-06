@@ -43,7 +43,7 @@ class Application
 
     protected function createServicesToDevelopment(): void
     {
-        if ($this->isLocal()) {
+        if (!$this->isLocal()) {
             return;
         }
         if ($this->getContainer()->has('whoops')) {

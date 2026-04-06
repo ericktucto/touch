@@ -1,4 +1,4 @@
-env: local
+env: testing
 definitions:
   - ./config.foo.php
 
